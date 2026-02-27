@@ -5,10 +5,13 @@ import { useState } from "react"
 
 export default function Hero() {
 
-    const [img, setImg] = useState<number>(1)
-    return(
+    const [img, setImg] = useState<number>(() => {
+        return Math.floor(Math.random() * 25) + 1
+    })
+
+    return (
         <div className="relative h-screen w-full bg-gray-300 grid grid-cols-5 grid-rows-5">
-            <Image 
+            <Image
                 src={`/hero-imgs/${img}.webp`}
                 alt={`imagen ${img}`}
                 fill
