@@ -6,6 +6,9 @@ import localFont from 'next/font/local'
 const tay = localFont({
   src: '../public/TAYBigBird.otf'
 })
+export const din = localFont({
+  src: '../public/fonts/DINCondensedBold.ttf'
+})
 
 import Nav from "./components/Navbar";
 
@@ -32,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={tay.className}
+        className={`${tay.className} ${din.className}`}
       >
         <div className="flex flex-row">
           <Nav />
