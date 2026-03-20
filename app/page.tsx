@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Hero from "./components/Hero";
 import HeroCartelera from './components/HeroCartelera';
 import CarruselCartelera from './components/CarruselCartelera';
+import Calendario from './components/Calendario';
 
 export default function Home() {
   return (
@@ -37,9 +38,7 @@ export default function Home() {
             </div>
           </section>
           {/* 4. Calendario */}
-          <section id="calendario" style={{ minHeight: '100vh', padding: '60px 40px', backgroundColor: '#F8C8C8' }}>
-            <h2>Calendario</h2>
-          </section>
+          <Calendario />
           {/* 5. Tienda */}
           <section id="tienda" style={{ minHeight: '100vh', padding: '60px 40px', backgroundColor: '#F1E0C4' }}>
             <h2>Tienda</h2>

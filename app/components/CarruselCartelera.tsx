@@ -44,7 +44,7 @@ export default function CarruselCartelera() {
     const prev = () => setCurrent((current-1+n)%n)
 
 return (
-    <section className="$[tay.className} min-h-screen bg-[#C9E5E8] flex flex-row">
+    <section className="$[tay.className} min-h-screen flex flex-row">
 
         {/* Contenedor Flyers */}
         <div className="w-3/5 flex items-center justify-center">
