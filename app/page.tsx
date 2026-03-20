@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Hero from "./components/Hero";
 import HeroCartelera from './components/HeroCartelera';
+import CarruselCartelera from './components/CarruselCartelera';
 
 export default function Home() {
   return (
@@ -13,12 +14,26 @@ export default function Home() {
         {/* 1. Hero Cartelera */}
         <HeroCartelera />
         {/* 2. Carrusel Cartelera */}
-        <section style={{ minHeight: 'calc(100vh + 327px)', padding: '60px 40px', backgroundColor:'#C9E5E8' }}>
-          <h2>Carrusel Cartelera (Seccion 2)</h2>
-        </section>
+        <CarruselCartelera />
         {/* 3. Newsletter */}
-        <section style={{ minHeight: '327px', padding: '60px 40px', backgroundColor:'#000000', color:'#ffffff'}}>
-          <h2>Newsletter</h2>
+        <section style={{ minHeight: '327px', padding: '60px 40px', backgroundColor:'#000000', color:'#ffffff', fontFamily: 'var(--font-tecla)' }}>
+          <div>
+            <h2 className="text-4xl">suscríbete a nuestro newsletter<br />
+              para enterarte de todo
+            </h2>
+            <div className="flex items-end">
+              <input
+                type="email"
+                placeholder="tu correo"
+                className="text-4xl text-white placeholder:text-white mt-15 p-0 m-0 w-90 outline-none"
+              />
+              <button className="flex items-center mb-2">
+                <img src="icons/newsletter-arrow-body.png" />
+                <img src="icons/newsletter-arrow-head.png" />
+              </button>
+            </div>
+            <img src="icons/newsletter-underline.png"/>
+          </div>
         </section>
         {/* 4. Calendario */}
         <section id="calendario" style={{ minHeight: '100vh', padding: '60px 40px', backgroundColor:'#F8C8C8' }}>

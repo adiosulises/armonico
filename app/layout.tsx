@@ -4,10 +4,15 @@ import "./globals.css";
 import localFont from 'next/font/local'
 
 const tay = localFont({
-  src: '../public/TAYBigBird.otf'
+  src: '../public/fonts/TAYBigBird.otf'
 })
 export const din = localFont({
-  src: '../public/fonts/DINCondensedBold.ttf'
+  src: '../public/fonts/DINCondensedBold.ttf',
+  variable: '--font-din',
+})
+export const tecla = localFont({
+  src: '../public/fonts/Tecla-Bold.otf',
+  variable: '--font-tecla',
 })
 
 import Nav from "./components/Navbar";
@@ -35,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${tay.className} ${din.className}`}
+        className={`${tay.className} ${din.variable} ${tecla.variable}`}
       >
         <div className="flex flex-row">
           <Nav />

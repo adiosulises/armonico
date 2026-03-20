@@ -17,7 +17,7 @@ export default function Nav() {
     ]
 
     return (
-        <div className="w-[277px] min-w-[277px] h-screen bg-white flex items-center justify-center sticky top-0 text-black text-xl">
+        <div className="$[tay.className} w-[277px] min-w-[277px] h-screen bg-white flex items-center justify-center sticky top-0 text-black text-xl">
             <div className="flex flex-col gap-2 items-center">
                 <Image
                     src={'/logo-black.png'}

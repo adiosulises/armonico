@@ -1,12 +1,10 @@
 'use client'
 import { useState } from "react"
-import { din } from '../layout'
-
 export default function HeroCartelera() {
 return (
-    <section id="inicio" className={`$[din.className} min-h-screen bg-black text-white uppercase flex items-center justify-center`}>
+    <section id="inicio" className="min-h-screen bg-black text-white uppercase flex items-center justify-center" style={{ fontFamily: 'var(--font-din)' }}>
           <div className="max-w-3xl w-full px-6 flex flex-col items-center px-10">
-            <hr className="w-full border-white my-0 -mb-[2px]" />
+            <hr className="w-full border-white my-0" />
             <div className="w-full h-13 flex items-center justify-center text-center text-7xl font-bold">
               <h1 className="leading-none -mb-[3px]">ARMONICO</h1>
             </div>
@@ -21,7 +19,7 @@ return (
               <h1 className="leading-none -mb-[3px]">BUEN CAMINO DAN</h1>
             </div>
             <hr className="w-full border-white my-0" />
-            <div className="w-full h-13 flex items-center justify-center text-center text-7xl font-bold">
+            <div className="w-full h-13 flex items-center justify-center text-center text-7xl font-bold -mb-[1px]">
               <h1>"HORMIGAS"</h1>
             </div>
             <hr className="w-full border-white my-0" />
