@@ -1,21 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import localFont from 'next/font/local'
-
-const tay = localFont({
-  src: '../public/fonts/TAYBigBird.otf'
-})
-export const din = localFont({
-  src: '../public/fonts/DINCondensedBold.ttf',
-  variable: '--font-din',
-})
-export const tecla = localFont({
-  src: '../public/fonts/Tecla-Bold.otf',
-  variable: '--font-tecla',
-})
-
-import Nav from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,14 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${tay.className} ${din.variable} ${tecla.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-row">
-          <Nav />
-          <main className="flex-1 min-w-0">
-            {children}
-          </main>
-        </div>
+        {children}
       </body>
     </html>
   );
