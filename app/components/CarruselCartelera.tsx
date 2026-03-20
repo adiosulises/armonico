@@ -28,6 +28,8 @@ const events = [
 },
 ]
 
+const rotations = events.map(() => Math.random() * 20 - 10)
+
 
 export default function CarruselCartelera() {
 
@@ -47,21 +49,21 @@ return (
         {/* Contenedor Flyers */}
         <div className="w-3/5 flex items-center justify-center">
             <div className="relative" style={{ width: 620, height: 774 }}>
-                <div className="absolute inset-0" style={{ transform: 'rotate(-6deg)', transformOrigin: 'center', zIndex: 1, transition: 'transform 0.4s ease, opacity 0.4s ease'}}>
+                <div className="absolute inset-0" style={{ transform: `rotate(${rotations[(current+2)%n]}deg)`, transformOrigin: 'center', zIndex: 1, transition: 'transform 0.4s ease, opacity 0.4s ease'}}>
                     <img src={back.flyer} alt="" className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute inset-0" style={{ transform: 'rotate(6deg)', transformOrigin: 'center', zIndex: 2, transition: 'transform 0.4s ease, opacity 0.4s ease' }}>
+                <div className="absolute inset-0" style={{ transform: `rotate(${rotations[(current+1)%n]}deg)`, transformOrigin: 'center', zIndex: 2, transition: 'transform 0.4s ease, opacity 0.4s ease' }}>
                     <img src={middle.flyer} alt="" className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute inset-0" style={{ transform: 'rotate(0deg)', transformOrigin: 'center', zIndex: 3, transition: 'transform 0.4s ease, opacity 0.4s ease' }}>
-                    <img src={front.flyer} alt="" className="w-full h-full object-cover" />
+                <div className="absolute inset-0" style={{ transform: `rotate(${rotations[(current)%n]}deg)`, transformOrigin: 'center', zIndex: 3, transition: 'transform 0.4s ease, opacity 0.4s ease' }}>
+                    <img src={front.flyer} alt="" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
                 </div>
             </div>
         </div>
         {/* Contenedor Info del Evento */}
         <div className="w-2/5 flex items-center justify-center flex-col">
             <h2 className="text-7xl">{front.title}</h2>
-            <p className="text-4xl">{front.support}</p>
+            <p className="text-4xl">{front.support || '\u00A0'}</p>
             <br />
             <p className="text-2xl text-[#C91E1F]">{front.date}</p>
             <p className="text-2xl text-[#C91E1F]">{front.time}</p>

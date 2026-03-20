@@ -14,6 +14,14 @@ export const tecla = localFont({
   src: '../public/fonts/Tecla-Bold.otf',
   variable: '--font-tecla',
 })
+export const grotesk75 = localFont({
+  src: '../public/fonts/NHaasGroteskTXPro-75Bd.ttf',
+  variable: '--font-grotesk75',
+})
+export const grotesk76 = localFont({
+  src: '../public/fonts/NHaasGroteskTXPro-76BdIt.ttf',
+  variable: '--font-grotesk76',
+})
 
 import Nav from "./components/Navbar";
 
@@ -40,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${tay.className} ${din.variable} ${tecla.variable}`}
+        className={`${tay.className} ${din.variable} ${tecla.variable} ${grotesk75.variable} ${grotesk76.variable}`}
       >
         <div className="flex flex-row">
           <Nav />
