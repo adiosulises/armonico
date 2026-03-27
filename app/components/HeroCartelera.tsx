@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link"
 export default function HeroCartelera() {
   return (
     <>
@@ -33,9 +34,9 @@ export default function HeroCartelera() {
             <h1 className="leading-none -mb-[3px]">14.FEB.25 - 8PM</h1>
           </div>
           <hr className="w-full border-white my-0" />
-          <button className="mt-10 bg-[#f5f0dc] text-black font-bold uppercase px-12 py-6 text-lg tracking-widest rounded">
+          <Link href="/buen-camino-dan" className="mt-10 bg-[#f5f0dc] text-black font-bold uppercase px-12 py-6 text-lg tracking-widest rounded">
             COMPRAR BOLETOS
-          </button>
+          </Link>
 
         </div>
       </section>

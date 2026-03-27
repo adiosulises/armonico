@@ -1,10 +1,8 @@
 "use client"
 
-import { useState } from 'react'
 import Hero from "./components/Hero";
 import HeroCartelera from './components/HeroCartelera';
 import CarruselCartelera from './components/CarruselCartelera';
-import Calendario from './components/Calendario';
 
 export default function Home() {
   return (
@@ -13,8 +11,6 @@ export default function Home() {
       <Hero />
       <div style={{ display: 'flex' }}>
         <main style={{ flex: 1 }}>
-          {/* 1. Hero Cartelera */}
-
           {/* 2. Carrusel Cartelera */}
           <CarruselCartelera />
           {/* 3. Newsletter */}
@@ -36,20 +32,6 @@ export default function Home() {
               </div>
               <img src="icons/newsletter-underline.png" />
             </div>
-          </section>
-          {/* 4. Calendario */}
-          <Calendario />
-          {/* 5. Tienda */}
-          <section id="tienda" style={{ minHeight: '100vh', padding: '60px 40px', backgroundColor: '#F1E0C4' }}>
-            <h2>Tienda</h2>
-          </section>
-          {/* 6. Blog */}
-          <section id="blog" style={{ minHeight: '100vh', padding: '60px 40px', backgroundColor: '#ffffff' }}>
-            <h2>Blog</h2>
-          </section>
-          {/* 7. Contacto */}
-          <section id="contacto" style={{ minHeight: '100vh', padding: '60px 40px' }}>
-            <h2>Contacto</h2>
           </section>
         </main>
       </div>

@@ -1,30 +1,31 @@
 'use client'
 import { useState } from "react"
+import Link from "next/link"
 
 const events = [
 {
+    slug: 'la-texana',
     title: 'LA TEXANA',
     support: 'JUNTO A SAN CHARBEL',
     date: 'NOV 22 25',
     time: '20H00',
     flyer: 'img/flyer1.jpg',
-    ticketUrl: '#',
 },
 {
+    slug: 'svild',
     title: 'SVILD',
     support: 'SESIÓN DE DIBUJO',
     date: 'NOV 12 25',
     time: '19H00',
     flyer: 'img/flyer2.jpg',
-    ticketUrl: '#',
 },
 {
+    slug: 'teatro-macabro',
     title: 'TEATRO MACABRO',
     support: '',
     date: 'NOV 15 25',
     time: '21H30',
     flyer: 'img/flyer3.jpg',
-    ticketUrl: '#',
 },
 ]
 
@@ -68,7 +69,7 @@ return (
             <p className="text-2xl text-[#C91E1F]">{front.date}</p>
             <p className="text-2xl text-[#C91E1F]">{front.time}</p>
             <br />
-            <a className="bg-black text-white px-8 py-1 tracking-widest text-2xl" href={front.ticketUrl}>BOLETOS</a>
+            <Link className="bg-black text-white px-8 py-1 tracking-widest text-2xl" href={`/${front.slug}`}>BOLETOS</Link>
             
             {/* Controles Carrusel */}
             <div className="flex items-center gap-15 mt-50">
