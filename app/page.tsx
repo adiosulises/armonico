@@ -1,6 +1,3 @@
-"use client"
-
-import { useState } from 'react'
 import Hero from "./components/Hero";
 import HeroCartelera from './components/HeroCartelera';
 import CarruselCartelera from './components/CarruselCartelera';
