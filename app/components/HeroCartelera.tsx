@@ -1,42 +1,80 @@
 'use client'
+
+import Link from "next/link"
+
+type ItemType = 'title' | 'subtitle' | 'spacer'
+
+interface HeroItem {
+  type: ItemType
+  text?: string
+}
+
+interface HeroData {
+  items: HeroItem[]
+  buttonText: string
+  buttonUrl: string
+}
+
+// 👇 Replace this with your Shopify fetch later
+const data: HeroData = {
+  items: [
+    { type: 'title', text: 'ARMONICO' },
+    { type: 'subtitle', text: 'PRESENTA' },
+    { type: 'spacer' },
+    { type: 'title', text: 'BUEN CAMINO DAN' },
+    { type: 'title', text: '"HORMIGAS"' },
+    { type: 'subtitle', text: 'EN VIVO' },
+    { type: 'spacer' },
+    { type: 'title', text: '14.FEB.25 - 8PM' },
+  ],
+  buttonText: 'COMPRAR BOLETOS',
+  buttonUrl: '/',
+}
+
+const styles = {
+  title: {
+    fontSize: 'clamp(2rem, 7vw, 16rem)',
+    lineHeight: 1,
+    marginTop: '-0.11em',
+    marginBottom: '-0.17em',
+  },
+  subtitle: {
+    fontSize: 'clamp(1.2rem, 4vw, 8rem)',
+    lineHeight: 1,
+    marginTop: '0.25em',
+    marginBottom: '-0.17em',
+  },
+}
+
 export default function HeroCartelera() {
   return (
     <>
-      <section id="inicio" className="min-h-screen bg-black text-white uppercase flex items-center justify-center" style={{ fontFamily: 'var(--font-din)' }}>
-        <div className="max-w-3xl w-full px-6 flex flex-col items-center px-10">
-          <hr className="w-full border-white my-0" />
-          <div className="w-full h-13 flex items-center justify-center text-center text-7xl font-bold">
-            <h1 className="leading-none -mb-[3px]">ARMONICO</h1>
-          </div>
-          <hr className="w-full border-white my-0" />
-          <div className="w-full h-13 flex items-end justify-center text-center text-4xl pb-[1px]">
-            <p className="leading-none -mb-[7px]">PRESENTA</p>
-          </div>
-          <hr className="w-full border-white my-0" />
-          <div className="w-full h-13" />
-          <hr className="w-full border-white my-0 -mb-[1px]" />
-          <div className="w-full h-13 flex items-center justify-center text-center text-7xl font-bold">
-            <h1 className="leading-none -mb-[3px]">BUEN CAMINO DAN</h1>
-          </div>
-          <hr className="w-full border-white my-0" />
-          <div className="w-full h-13 flex items-center justify-center text-center text-7xl font-bold -mb-[1px]">
-            <h1>"HORMIGAS"</h1>
-          </div>
-          <hr className="w-full border-white my-0" />
-          <div className="w-full h-13 flex items-end justify-center text-center text-4xl pb-[1px]">
-            <p className="leading-none -mb-[7px]">EN VIVO</p>
-          </div>
-          <hr className="w-full border-white my-0" />
-          <div className="w-full h-13" />
-          <hr className="w-full border-white my-0 -mb-[1px]" />
-          <div className="w-full h-13 flex items-center justify-center text-center text-7xl font-bold">
-            <h1 className="leading-none -mb-[3px]">14.FEB.25 - 8PM</h1>
-          </div>
-          <hr className="w-full border-white my-0" />
-          <button className="mt-10 bg-[#f5f0dc] text-black font-bold uppercase px-12 py-6 text-lg tracking-widest rounded">
-            COMPRAR BOLETOS
-          </button>
-
+      <section
+        id="inicio"
+        className="h-screen min-h-screen uppercase flex items-center justify-center text-center"
+        style={{ fontFamily: 'var(--font-din)' }}
+      >
+        {/* INFO */}
+        <div className="">
+          <hr className="border-black" />
+          {data.items.map((item, i) => (
+            item.type === 'spacer'
+              ? <div key={i} className="leading-none" />
+              : <div key={i} className="leading-none">
+                <p style={styles[item.type]} className="px-30">
+                  {item.text}
+                </p>
+                <hr className="border-black" />
+              </div>
+          ))}
+          <Link href={data.buttonUrl}>
+            <button
+              className="text-black font-bold uppercase tracking-widest pt-20 hover:underline decoration-1  "
+              style={{ fontSize: 'clamp(1rem, 3vw, 3rem)' }}
+            >
+              {data.buttonText}
+            </button>
+          </Link>
         </div>
       </section>
       <div id="hero-sentinel" />
