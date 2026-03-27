@@ -33,7 +33,7 @@ export default function Nav() {
 
     return (
         <div
-            className="sticky top-0 h-screen bg-white flex items-center justify-center text-black text-xl"
+            className="sticky top-0 h-screen bg-white flex items-center justify-center text-black text-xl shadow-xl"
             style={{
                 width: heroVisible ? '0px' : '277px',
                 minWidth: heroVisible ? '0px' : '277px',
