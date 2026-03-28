@@ -1,5 +1,3 @@
-"use client"
-
 import Hero from "./components/Hero";
 import HeroCartelera from './components/HeroCartelera';
 import CarruselCartelera from './components/CarruselCartelera';
