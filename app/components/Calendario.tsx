@@ -77,12 +77,14 @@ export default function Calendario() {
         </div>
 
         {/* Eventos */}
-        {pageEvents.map((event, i) => (
-          <div key={event.date} className={`flex items-center gap-10 ${i === 0 ? 'mt-5' : 'mt-3'}`}>
-            <div className="text-[#C91E1F] text-xl shrink-0" style={{fontFamily: 'var(--font-tayvar', transform: `rotate(${rotations[i]}deg)`}}>{event.date}</div>
-            <div className="text-xl overflow-hidden flex items-center" style={{fontFamily: 'var(--font-grotesk75)', width: '297px', height: '48px'}}>{event.title}</div>
-          </div>
-        ))}
+        <div style={{ height: '548px' }}>
+          {pageEvents.map((event, i) => (
+            <div key={event.date} className={`flex items-center gap-10 ${i === 0 ? 'mt-5' : 'mt-3'}`}>
+              <div className="text-[#C91E1F] text-xl shrink-0" style={{fontFamily: 'var(--font-tayvar', transform: `rotate(${rotations[i]}deg)`}}>{event.date}</div>
+              <div className="text-xl overflow-hidden flex items-center" style={{fontFamily: 'var(--font-grotesk75)', width: '297px', height: '48px'}}>{event.title}</div>
+            </div>
+          ))}
+        </div>
 
         {/* Paginación */}
         {totalPages > 1 && (

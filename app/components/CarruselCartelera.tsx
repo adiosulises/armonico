@@ -1,38 +1,20 @@
 'use client'
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
 
-const events = [
-{
-    slug: 'la-texana',
-    title: 'LA TEXANA',
-    support: 'JUNTO A SAN CHARBEL',
-    date: 'NOV 22 25',
-    time: '20H00',
-    flyer: 'img/flyer1.jpg',
-},
-{
-    slug: 'svild',
-    title: 'SVILD',
-    support: 'SESIÓN DE DIBUJO',
-    date: 'NOV 12 25',
-    time: '19H00',
-    flyer: 'img/flyer2.jpg',
-},
-{
-    slug: 'teatro-macabro',
-    title: 'TEATRO MACABRO',
-    support: '',
-    date: 'NOV 15 25',
-    time: '21H30',
-    flyer: 'img/flyer3.jpg',
-},
-]
-
-const rotations = events.map(() => Math.random() * 20 - 10)
+type CarruselEvent = {
+    slug: string,
+    title: string,
+    support: string,
+    date: string,
+    time: string,
+    flyer: string
+}
 
 
-export default function CarruselCartelera() {
+
+
+export default function CarruselCartelera({ events }: {events: CarruselEvent[] }) {
 
     const [current,setCurrent] = useState(0);
     const n = events.length;
@@ -43,6 +25,11 @@ export default function CarruselCartelera() {
 
     const next = () => setCurrent((current+1)%n)
     const prev = () => setCurrent((current-1+n)%n)
+
+    const rotations = useMemo(
+    () => events.map(()=> +(Math.random() * 20 - 10).toFixed(2)),
+    [events]
+)
 
 return (
     <section className="$[tay.className} min-h-screen flex flex-row">
@@ -63,7 +50,7 @@ return (
         </div>
         {/* Contenedor Info del Evento */}
         <div className="w-2/5 flex items-center justify-center flex-col">
-            <h2 className="text-7xl">{front.title}</h2>
+            <h2 className="text-7xl text-center">{front.title}</h2>
             <p className="text-4xl">{front.support || '\u00A0'}</p>
             <br />
             <p className="text-2xl text-[#C91E1F]">{front.date}</p>

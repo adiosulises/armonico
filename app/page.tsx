@@ -1,8 +1,22 @@
 import Hero from "./components/Hero";
 import HeroCartelera from './components/HeroCartelera';
 import CarruselCartelera from './components/CarruselCartelera';
+import { getEvents, formatTime, formatDate } from './lib/shopify'
 
-export default function Home() {
+export default async function Home() {
+
+  // Fetcher eventos
+  const rawEvents = await getEvents()
+
+  const events = rawEvents.map(e=>({
+    slug: e.handle,
+    title: e.title,
+    support: e.support,
+    date: formatDate(e.evey.start_at),
+    time: formatTime(e.evey.start_at),
+    flyer: e.flyer
+  }))
+
   return (
     <div>
       <HeroCartelera />
@@ -10,7 +24,7 @@ export default function Home() {
       <div style={{ display: 'flex' }}>
         <main style={{ flex: 1 }}>
           {/* 2. Carrusel Cartelera */}
-          <CarruselCartelera />
+          <CarruselCartelera events={events} />
           {/* 3. Newsletter */}
           <section style={{ minHeight: '327px', padding: '60px 40px', backgroundColor: '#000000', color: '#ffffff', fontFamily: 'var(--font-tecla)' }}>
             <div>
