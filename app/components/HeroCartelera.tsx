@@ -12,6 +12,7 @@ const PRODUCT_QUERY = `
         node {
           title
           handle
+          productType
           onlineStoreUrl
           metafields(identifiers: [
             { namespace: "evey", key: "event" }
@@ -19,7 +20,6 @@ const PRODUCT_QUERY = `
             namespace
             key
             value
-            type
           }
         }
       }
@@ -33,6 +33,7 @@ function getNextEvent(products: any[]) {
   const events = products
     .map(({ node }: any) => {
       const metafield = node.metafields?.[0]
+      console.log('productType:', node.productType, 'metafield:', metafield)
       if (!metafield?.value) return null
 
       const evey = JSON.parse(metafield.value)
@@ -57,14 +58,22 @@ function formatDate(dateStr: string, timezone: string) {
   return `${day}.${month}.${year} - ${time.toUpperCase()}`
 }
 
+const productTypeLabel: Record<string, string> = {
+  'Expo': 'EXPOSICIÓN',
+  'Taller': 'TALLER',
+  'Live': 'EN VIVO',
+  'Proyección': 'EN PANTALLA GRANDE',
+}
+
 function buildData(node: any, evey: any): HeroData {
+  const typeLabel = productTypeLabel[node.productType] ?? node.productType
   return {
     items: [
       { type: 'title', text: 'ARMONICO' },
       { type: 'subtitle', text: 'PRESENTA' },
       { type: 'spacer' },
       { type: 'title', text: node.title },
-      { type: 'subtitle', text: 'EN VIVO' },
+      { type: 'subtitle', text: typeLabel },
       { type: 'spacer' },
       { type: 'empty' },
       { type: 'spacer' },
