@@ -69,7 +69,7 @@ function buildData(node: any, evey: any): HeroData {
   const typeLabel = productTypeLabel[node.productType] ?? node.productType
   return {
     items: [
-      { type: 'title', text: 'ARMONICO' },
+      { type: 'title', text: 'ARMÓNICO' },
       { type: 'subtitle', text: 'PRESENTA' },
       { type: 'spacer' },
       { type: 'title', text: node.title },
