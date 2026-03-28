@@ -8,19 +8,23 @@ const tay = localFont({
 })
 export const din = localFont({
   src: '../public/fonts/DINCondensedBold.ttf',
-  variable: '--font-din',
+  variable: '--font-din'
 })
 export const tecla = localFont({
   src: '../public/fonts/Tecla-Bold.otf',
-  variable: '--font-tecla',
+  variable: '--font-tecla'
 })
 export const grotesk75 = localFont({
   src: '../public/fonts/NHaasGroteskTXPro-75Bd.ttf',
-  variable: '--font-grotesk75',
+  variable: '--font-grotesk75'
 })
 export const grotesk76 = localFont({
   src: '../public/fonts/NHaasGroteskTXPro-76BdIt.ttf',
-  variable: '--font-grotesk76',
+  variable: '--font-grotesk76'
+})
+export const tayvar = localFont({
+  src: '../public/fonts/TAYBigBird.otf',
+  variable: '--font--tayvar'
 })
 
 import Nav from "./components/Navbar";
@@ -48,7 +52,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${tay.className} ${din.variable} ${tecla.variable} ${grotesk75.variable} ${grotesk76.variable}`}
+        className={`
+          ${tay.className} 
+          ${din.variable} 
+          ${tecla.variable} 
+          ${grotesk75.variable} 
+          ${grotesk76.variable}
+          ${tayvar.variable}
+          `}
       >
         <div className="flex flex-row">
           <Nav />
