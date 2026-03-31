@@ -1,21 +1,11 @@
 'use client'
 import { useState, useMemo } from "react"
 
-const events = [
-  { date: 'NOV 01.25', title: 'APERTURA DE TEMPORADA', month: 'NOVIEMBRE' },
-  { date: 'NOV 05.25', title: 'CONCIERTO DE JAZZ EN VIVO', month: 'NOVIEMBRE' },
-  { date: 'NOV 08.25', title: 'TALLER DE FOTOGRAFÍA ANALÓGICA', month: 'NOVIEMBRE' },
-  { date: 'NOV 12.25', title: 'SESIÓN DE DIBUJO CON: SVIND', month: 'NOVIEMBRE' },
-  { date: 'NOV 15.25', title: 'TEATRO MACABRO', month: 'NOVIEMBRE' },
-  { date: 'NOV 17.25', title: 'FERIA DE ZINES INDEPENDIENTES', month: 'NOVIEMBRE' },
-  { date: 'NOV 20.25', title: 'PROYECCIÓN: CINE DE CULTO', month: 'NOVIEMBRE' },
-  { date: 'NOV 22.25', title: 'LA TEXANA JUNTO A SAN CHARBEL', month: 'NOVIEMBRE' },
-  { date: 'NOV 26.25', title: 'LECTURA DE POESÍA SONORA', month: 'NOVIEMBRE' },
-  { date: 'NOV 29.25', title: 'NOCHE DE IMPROVISACIÓN', month: 'NOVIEMBRE' },
-  { date: 'DIC 06.25', title: 'MERCADO NAVIDEÑO ARTESANAL', month: 'DICIEMBRE' },
-  { date: 'DIC 13.25', title: 'CONCIERTO FIN DE AÑO', month: 'DICIEMBRE' },
-  { date: 'DIC 20.25', title: 'CIERRE DE TEMPORADA', month: 'DICIEMBRE' },
-]
+type CalendarioEvent = {
+  date: string
+  title: string
+  month: string
+}
 
 const months = [
   'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO',
@@ -24,9 +14,11 @@ const months = [
 
 const PAGE_SIZE = 9
 
-export default function Calendario() {
+export default function Calendario({ events = [] }: { events: CalendarioEvent[] }) {
 
-  const [selectedMonth, setSelectedMonth] = useState('NOVIEMBRE')
+  const defaultMonth = months.find(m => events.some(e => e.month === m)) ?? months[0]
+
+  const [selectedMonth, setSelectedMonth] = useState(defaultMonth)
   const [page, setPage] = useState(0)
 
   const visibleEvents = events.filter(e => e.month === selectedMonth)
@@ -81,7 +73,7 @@ export default function Calendario() {
           {pageEvents.map((event, i) => (
             <div key={event.date} className={`flex items-center gap-10 ${i === 0 ? 'mt-5' : 'mt-3'}`}>
               <div className="text-[#C91E1F] text-xl shrink-0" style={{fontFamily: 'var(--font-tayvar', transform: `rotate(${rotations[i]}deg)`}}>{event.date}</div>
-              <div className="text-xl overflow-hidden flex items-center" style={{fontFamily: 'var(--font-grotesk75)', width: '297px', height: '48px'}}>{event.title}</div>
+              <div className="text-xl overflow-hidden flex items-center uppercase" style={{fontFamily: 'var(--font-grotesk75)', width: '297px', height: '48px'}}>{event.title}</div>
             </div>
           ))}
         </div>

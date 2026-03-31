@@ -80,7 +80,7 @@ function buildData(node: any, evey: any): HeroData {
       { type: 'title', text: formatDate(evey.start_at, evey.timezone) },
     ],
     buttonText: 'COMPRAR BOLETOS',
-    buttonUrl: node.onlineStoreUrl ?? '/',
+    buttonUrl: `/${node.handle}`,
   }
 }
 
