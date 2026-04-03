@@ -111,6 +111,11 @@ const MONTH_ABBR = [
     'JUL','AGO','SEP','OCT','NOV','DIC'
 ]
 
+export const MONTH_FULL = [
+    'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO',
+    'JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'
+]
+
 // APIs
 
 export async function getEvents(): Promise<ShopifyEvent[]> {
