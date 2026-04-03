@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function Nav() {
     const pathname = usePathname()
-    const [heroVisible, setHeroVisible] = useState(true)
+    const [heroVisible, setHeroVisible] = useState(() => pathname === '/')
 
     useEffect(() => {
         const sentinel = document.getElementById('hero-sentinel')

@@ -4,7 +4,7 @@ import { ShopifyVariant } from '../lib/shopify'
 
 const expandables = [
   { label: 'TODOS LOS ACTOS' },
-  { label: 'RUNNING ORDER' },
+  { label: 'ORDEN DE ACTOS' },
   { label: 'REGLAS' },
 ]
 
@@ -22,11 +22,12 @@ type Props = {
 export default function EventPageClient({ title, support, date, time, description, flyer, variants, storeDomain }: Props) {
   const [open, setOpen] = useState<number | null>(null)
   const [qty, setQty] = useState(1)
+  const [selectedVariant, setSelectedVariant] = useState<ShopifyVariant | null>(null)
 
   const toggle = (i: number) => setOpen(prev => (prev === i ? null : i))
 
-  const buyUrl = variants.length > 0
-    ? `https://${storeDomain}/cart/${variants[0].id}:${qty}`
+  const buyUrl = selectedVariant
+    ? `https://${storeDomain}/cart/${selectedVariant.id}:${qty}`
     : '#'
 
   return (
@@ -42,15 +43,12 @@ export default function EventPageClient({ title, support, date, time, descriptio
       {/* Info */}
       <div className="w-2/5 flex flex-col justify-center pr-16 gap-2">
 
-        {/* Title & support */}
         <h1 className="text-7xl uppercase leading-none text-center">{title}</h1>
         <p className="text-4xl uppercase text-gray-500 text-center">{support || '\u00A0'}</p>
 
-        {/* Date & time */}
         <p className="text-2xl text-[#C91E1F] mt-2 text-center">{date}</p>
         <p className="text-2xl text-[#C91E1F] text-center">{time}</p>
 
-        {/* Description */}
         <div className="mt-4 min-h-[80px] text-base uppercase text-gray-700">
           {description}
         </div>
@@ -72,39 +70,48 @@ export default function EventPageClient({ title, support, date, time, descriptio
           ))}
         </div>
 
-        {/* Ticket phases */}
+        {/* Ticket variants */}
         <div className="mt-6 flex flex-col gap-1 text-xl uppercase">
-          {variants.map((v, i) => (
-            <div key={v.id} className={`flex justify-between ${i > 0 ? 'text-gray-400' : ''}`}>
-              <span>{v.title}</span>
-              <span>${parseFloat(v.price).toLocaleString('es-MX')}</span>
-            </div>
-          ))}
+          {variants.map((v) => {
+            const isSelected = selectedVariant?.id === v.id
+            return (
+              <button
+                key={v.id}
+                onClick={() => setSelectedVariant(v)}
+                className={`flex justify-between text-left transition-colors ${isSelected ? 'text-[#C91E1F]' : 'text-black'}`}
+              >
+                <span>{v.title == 'General Admission' ? 'ADMISIÓN GENERAL' : v.title}</span>
+                <span>{parseFloat(v.price) === 0 ? 'GRATIS' : '$' + parseFloat(v.price).toLocaleString('es-MX')}</span>
+              </button>
+            )
+          })}
         </div>
 
         <hr className="border-black mt-4" />
 
-        {/* Quantity + buy */}
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex items-center gap-3 text-xl uppercase">
-            <span>Boletos:</span>
-            <div className="relative flex items-center">
-              <select
-                value={qty}
-                onChange={e => setQty(Number(e.target.value))}
-                className="appearance-none bg-transparent text-xl uppercase outline-none cursor-pointer pr-2"
-              >
-                {[1,2,3,4,5,6,7,8,9,10].map(n => (
-                  <option key={n} value={n}>{n}</option>
-                ))}
-              </select>
-              <span className="pointer-events-none absolute right-0 text-sm">▾</span>
+        {/* Quantity + buy — only shown when a variant is selected */}
+        {selectedVariant && (
+          <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center gap-3 text-xl uppercase">
+              <span>Boletos:</span>
+              <div className="relative flex items-center">
+                <select
+                  value={qty}
+                  onChange={e => setQty(Number(e.target.value))}
+                  className="appearance-none bg-transparent text-xl uppercase outline-none cursor-pointer pr-2"
+                >
+                  {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                    <option key={n} value={n}>{n}</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-0 text-sm">▾</span>
+              </div>
             </div>
+            <a href={buyUrl} className="text-xl uppercase underline tracking-widest">
+              COMPRAR
+            </a>
           </div>
-          <a href={buyUrl} className="text-xl uppercase underline tracking-widest">
-            COMPRAR
-          </a>
-        </div>
+        )}
 
       </div>
     </section>

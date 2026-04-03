@@ -1,5 +1,5 @@
 'use client'
-import { useState, useMemo } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 
 type CarruselEvent = {
@@ -26,10 +26,11 @@ export default function CarruselCartelera({ events }: { events: CarruselEvent[] 
     const next = () => setCurrent((current + 1) % n)
     const prev = () => setCurrent((current - 1 + n) % n)
 
-    const rotations = useMemo(
-        () => events.map(() => +(Math.random() * 20 - 10).toFixed(2)),
-        [events]
-    )
+    const [rotations, setRotations] = useState<number[]>([])
+
+    useEffect(() => {
+        setRotations(events.map(() => +(Math.random() * 20 - 10).toFixed(2)))
+    }, [events])
 
     return (
         <section className="$[tay.className} min-h-screen flex flex-row items-center">
@@ -62,7 +63,7 @@ export default function CarruselCartelera({ events }: { events: CarruselEvent[] 
 
                 {/* Controles Carrusel */}
                 <div className="flex items-center gap-15 mt-50">
-                    <button onClick={prev}>
+                    <button onClick={prev} className="p-10 cursor-pointer">
                         <img src="/icons/hero-carrusel-left-arrow.png" alt="anterior" />
                     </button>
                     {events.map((_, i) => (
@@ -70,7 +71,7 @@ export default function CarruselCartelera({ events }: { events: CarruselEvent[] 
                             <img src={i === current ? '/icons/hero-carrusel-selected.png' : '/icons/hero-carrusel-unselected.png'} alt="" />
                         </button>
                     ))}
-                    <button onClick={next}>
+                    <button onClick={next} className="p-10 cursor-pointer">
                         <img src="/icons/hero-carrusel-right-arrow.png" alt="siguiente" />
                     </button>
                 </div>

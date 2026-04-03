@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import localFont from 'next/font/local'
+import { Toaster } from "./components/ui/sonner"
 
 const tay = localFont({
   src: '../public/fonts/TAYBigBird.otf'
@@ -63,6 +64,18 @@ export default function RootLayout({
       >
         <div className="flex flex-row">
           <Nav />
+          <Toaster
+            toastOptions={{
+              className: tay.className,
+              style: {
+                background: '#fff',
+                color: '#000',
+                border: 'none',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+                fontSize: '20px',
+              }
+            }}
+          />
           <main className="flex-1 min-w-0">
             {children}
           </main>

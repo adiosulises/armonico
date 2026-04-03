@@ -1,15 +1,17 @@
 'use client'
 import { useState, useMemo } from "react"
+import Link from "next/link"
 
 type CalendarioEvent = {
   date: string
   title: string
   month: string
+  slug: string
 }
 
 const months = [
-  'ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO',
-  'JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE',
+  'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
+  'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE',
 ]
 
 const PAGE_SIZE = 9
@@ -36,17 +38,17 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
   }
 
   return (
-    <section className="flex flex-col relative overflow-hidden" style={{fontFamily: 'var(--font-tecla)', height: '1117px'}}>
+    <section className="flex flex-col relative overflow-hidden" style={{ fontFamily: 'var(--font-tecla)', height: '1117px' }}>
       {/* Watermark */}
       <img src="/img/armonico-wm.png" alt="" aria-hidden className="absolute inset-0 m-auto pointer-events-none select-none" style={{ opacity: 0.06, transform: 'rotate(-15deg)' }} />
       {/* Selector de meses */}
       <div className="flex flex-col items-center gap-6 py-6">
         <div className="flex gap-20">
-          {months.slice(0,6).map(m => (
+          {months.slice(0, 6).map(m => (
             <button
               key={m}
               onClick={() => handleMonthSelect(m)}
-              className={m === selectedMonth ? 'text-[#C91E1F]' : 'text-black text-lg'}>
+              className={m === selectedMonth ? 'text-[#C91E1F] text-lg' : 'text-black text-lg'}>
               {m}
             </button>
           ))}
@@ -56,14 +58,14 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
             <button
               key={m}
               onClick={() => handleMonthSelect(m)}
-              className={m === selectedMonth ? 'text-[#C91E1F]' : 'text-black text-lg'}>
+              className={m === selectedMonth ? 'text-[#C91E1F] text-lg' : 'text-black text-lg'}>
               {m}
             </button>
           ))}
         </div>
       </div>
       {/* Tarjeta */}
-      <div className='mx-auto p-6 flex flex-col mt-8' style={{ backgroundImage: "url('/img/calendario-bg.png')", backgroundSize: '100% 100%', width: '548px', height: '874px', transform: 'rotate(-3deg)'}}>
+      <div className='mx-auto p-6 flex flex-col mt-8' style={{ backgroundImage: "url('/img/calendario-bg.png')", backgroundSize: '100% 100%', width: '548px', height: '874px', transform: 'rotate(-3deg)' }}>
         <div className='mt-18.5 ml-8.5 text-sm'>
           <p>{selectedMonth}</p>
         </div>
@@ -72,8 +74,14 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
         <div style={{ height: '548px' }}>
           {pageEvents.map((event, i) => (
             <div key={event.date} className={`flex items-center gap-10 ${i === 0 ? 'mt-5' : 'mt-3'}`}>
-              <div className="text-[#C91E1F] text-xl shrink-0" style={{fontFamily: 'var(--font-tayvar', transform: `rotate(${rotations[i]}deg)`}}>{event.date}</div>
-              <div className="text-xl overflow-hidden flex items-center uppercase" style={{fontFamily: 'var(--font-grotesk75)', width: '297px', height: '48px'}}>{event.title}</div>
+              <div className="text-[#C91E1F] text-xl shrink-0" style={{ fontFamily: 'var(--font-tayvar', transform: `rotate(${rotations[i]}deg)` }}>{event.date}</div>
+              <Link
+                href={`/${event.slug}`}
+                className="text-xl overflow-hidden flex items-center uppercase hover:underline"
+                style={{ fontFamily: 'var(--font-grotesk75)', width: '297px', height: '48px' }}
+              >
+                {event.title}
+              </Link>
             </div>
           ))}
         </div>
