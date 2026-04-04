@@ -1,4 +1,4 @@
-import Calendario from '../components/Calendario'
+import Calendario from '../components/CalendarioUlises'
 import { getEvents, formatDate, MONTH_FULL } from '../lib/shopify'
 
 export default async function CalendarioPage() {

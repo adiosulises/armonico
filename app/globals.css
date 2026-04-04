@@ -45,3 +45,11 @@ body {
     0 4px 0 #111;
   margin-bottom: 4px;
 }
+
+.c-bg {
+ background-color: #fffcee;
+}
+
+.c-hr {
+  color: #0f7ccc;
+}
