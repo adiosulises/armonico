@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import localFont from 'next/font/local'
 
 const tay = localFont({ src: '../../public/fonts/TAYBigBird.otf' })
@@ -183,14 +184,19 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
                     )}
 
                     {/* Footer */}
-                    <div className="pt-4" style={{ fontSize: 'clamp(11px, 0.8vw, 11px)', lineHeight: 1.4 }}>
-                        <p>ARM&Oacute;NICO CENTRO CULTURAL</p>
-                        <p>L-V: 18H00-20H00</p>
-                        <p>S-D: 18H00-20H00</p>
-                        <br />
-                        <div className="flex gap-1">
-                            <div><p>DELICIAS,</p><p>CENTRO,</p></div>
-                            <div><p>CUU</p><p>03300</p></div>
+                    <div className="pt-4 flex justify-between items-end" style={{ fontSize: 'clamp(11px, 0.8vw, 11px)', lineHeight: 1.4 }}>
+                        <div>
+                            <p>ARM&Oacute;NICO CENTRO CULTURAL</p>
+                            <p>L-V: 18H00-20H00</p>
+                            <p>S-D: 18H00-20H00</p>
+                            <br />
+                            <div className="flex gap-1">
+                                <div><p>DELICIAS,</p><p>CENTRO,</p></div>
+                                <div><p>CUU</p><p>03300</p></div>
+                            </div>
+                        </div>
+                        <div>
+                            <Image src={'/logo-black.png'} alt="logo" width={80} height={100} />
                         </div>
                     </div>
                 </div>
