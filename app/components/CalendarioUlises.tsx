@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import localFont from 'next/font/local'
 
@@ -68,7 +68,7 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
                 style={{ opacity: 0.06, transform: 'rotate(-15deg)' }}
             />
 
-            {/* Month selector — pinned to top */}
+            {/* Month selector */}
             <div className="flex flex-col items-center gap-3 py-4 z-10 shrink-0">
                 {isMobile ? (
                     <select
@@ -101,22 +101,22 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
                 )}
             </div>
 
-            {/* Card — centered in remaining space */}
+            {/* Card */}
             <div className="flex-1 flex items-center justify-center z-10">
                 <div
                     className="c-bg shadow-2xl flex flex-col uppercase"
                     style={{
                         fontFamily: 'var(--font-tecla)',
-                        width: 'clamp(300px, 38vw, 548px)',
+                        width: 'clamp(300px, 90vw, 548px)',
                         padding: 'clamp(12px, 2vw, 24px)',
                         transform: isMobile ? 'none' : 'rotate(-3deg)',
-                        fontSize: 'clamp(9px, 1vw, 13px)',
+                        fontSize: 'clamp(13px, 1vw, 13px)',
                     }}
                 >
                     {/* Header */}
                     <div className="flex justify-between items-start">
                         <p>CUU.</p>
-                        <div className="text-center" style={{ fontSize: 'clamp(11px, 1.4vw, 18px)', lineHeight: 1.3 }}>
+                        <div className="text-center" style={{ fontSize: 'clamp(15px, 1.4vw, 18px)', lineHeight: 1.3 }}>
                             <h2>ARM&Oacute;NICO<br />AGENDA MENSUAL</h2>
                         </div>
                         <p>MÉX.</p>
@@ -142,7 +142,7 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
                                     <span
                                         className={`text-[#C91E1F] ${tay.className}`}
                                         style={{
-                                            fontSize: 'clamp(10px, 1.3vw, 18px)',
+                                            fontSize: '20px',
                                             display: 'inline-block',
                                             transform: rotations[i] !== undefined ? `rotate(${rotations[i]}deg)` : 'none'
                                         }}
@@ -157,7 +157,7 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
                                             className="uppercase hover:underline overflow-hidden leading-tight text-black"
                                             style={{
                                                 fontFamily: 'var(--font-grotesk75)',
-                                                fontSize: 'clamp(10px, 1.4vw, 20px)',
+                                                fontSize: '20',
                                                 display: '-webkit-box',
                                                 WebkitLineClamp: 2,
                                                 WebkitBoxOrient: 'vertical'
@@ -166,7 +166,7 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
                                             {event.title}
                                         </Link>
                                     ) : (
-                                        <span style={{ fontFamily: 'var(--font-grotesk75)', fontSize: 'clamp(10px, 1.4vw, 20px)' }} />
+                                        <span style={{ fontFamily: 'var(--font-grotesk75)', fontSize: 'clamp(14px, 1.4vw, 20px)' }} />
                                     )}
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
 
                     {/* Pagination */}
                     {totalPages > 1 && (
-                        <div className="flex justify-between items-center pt-1 pb-1" style={{ fontSize: 'clamp(8px, 0.9vw, 12px)' }}>
+                        <div className="flex justify-between items-center pt-1 pb-1" style={{ fontSize: 'clamp(12px, 0.9vw, 12px)' }}>
                             <button onClick={() => setPage(p => p - 1)} disabled={page === 0} className="disabled:opacity-30">← ANTERIOR</button>
                             <span>{page + 1} / {totalPages}</span>
                             <button onClick={() => setPage(p => p + 1)} disabled={page === totalPages - 1} className="disabled:opacity-30">SIGUIENTE →</button>
@@ -183,7 +183,7 @@ export default function Calendario({ events = [] }: { events: CalendarioEvent[] 
                     )}
 
                     {/* Footer */}
-                    <div className="pt-4" style={{ fontSize: 'clamp(7px, 0.8vw, 11px)', lineHeight: 1.4 }}>
+                    <div className="pt-4" style={{ fontSize: 'clamp(11px, 0.8vw, 11px)', lineHeight: 1.4 }}>
                         <p>ARM&Oacute;NICO CENTRO CULTURAL</p>
                         <p>L-V: 18H00-20H00</p>
                         <p>S-D: 18H00-20H00</p>
