@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 
 const GMAPS = "https://maps.app.goo.gl/Lz49m2LSe4REeXh56"
-const GEO = "geo:28.6353,-106.0889?q=C.+11+2008,+Bolivar,+Zona+Centro,+Chihuahua"
+const GEO = "geo:28.636213478486578, -106.06887468465658"
 
 export default function ContactoComponent() {
     const [isMobile, setIsMobile] = useState(false)
