@@ -2,15 +2,12 @@
 import { useState } from 'react'
 import { ShopifyVariant } from '../lib/shopify'
 
-const expandables = [
-  { label: 'TODOS LOS ACTOS' },
-  { label: 'ORDEN DE ACTOS' },
-  { label: 'REGLAS' },
-]
-
 type Props = {
   title: string
   support: string
+  actos: string
+  orden: string
+  reglas: string
   date: string
   time: string
   description: string
@@ -19,7 +16,13 @@ type Props = {
   storeDomain: string
 }
 
-export default function EventPageClient({ title, support, date, time, description, flyer, variants, storeDomain }: Props) {
+export default function EventPageClient({ title, support, actos, orden, reglas, date, time, description, flyer, variants, storeDomain }: Props) {
+  const expandables = [
+    actos  ? { label: 'TODOS LOS ACTOS', content: actos  } : null,
+    orden  ? { label: 'ORDEN DE ACTOS',  content: orden  } : null,
+    reglas ? { label: 'REGLAS',          content: reglas } : null,
+  ].filter(Boolean) as { label: string; content: string }[]
+
   const [open, setOpen] = useState<number | null>(null)
   const [qty, setQty] = useState(1)
   const [selectedVariant, setSelectedVariant] = useState<ShopifyVariant | null>(null)
@@ -65,7 +68,7 @@ export default function EventPageClient({ title, support, date, time, descriptio
                 <span>{open === i ? '− ' : '+ '}{item.label}</span>
               </button>
               {open === i && (
-                <div className="pb-4 text-sm uppercase text-gray-500 px-1" />
+                <div className="pb-4 text-sm uppercase text-gray-500 px-1">{item.content}</div>
               )}
             </div>
           ))}
