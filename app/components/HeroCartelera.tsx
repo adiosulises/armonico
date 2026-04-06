@@ -58,6 +58,7 @@ const productTypeLabel: Record<string, string> = {
   'Proyección': 'EN PANTALLA GRANDE',
 }
 
+// Split long titles into chunks of max N words so each chunk fits on one line
 function splitIntoRows(text: string, maxWords = 3): string[] {
   const words = text.split(' ')
   const rows: string[] = []
@@ -70,6 +71,8 @@ function splitIntoRows(text: string, maxWords = 3): string[] {
 function buildData(node: any, evey: any): HeroData {
   const typeLabel = productTypeLabel[node.productType] ?? node.productType
   const title: string = node.title
+
+  // Only split if title is long — short titles stay as one row
   const titleItems: HeroItem[] = title.length > 24
     ? splitIntoRows(title, 3).map(row => ({ type: 'title', text: row }))
     : [{ type: 'title', text: title }]
@@ -139,13 +142,13 @@ export default async function HeroCartelera() {
         @media (max-width: 767px) {
           .hero-title {
             font-size: 2.8rem !important;
-            margin-top: -0.07em !important;
-            margin-bottom: -0.13em !important;
+            padding-bottom: 0em !important;
+            padding-top: .3em !important;
           }
           .hero-subtitle {
             font-size: 1.6rem !important;
-            margin-top: 0.38em !important;
-            margin-bottom: -0.13em !important;
+            padding-top: 0.45em !important;
+            padding-bottom: -0.17em !important;
           }
           .hero-button {
             font-size: 1.4rem !important;
@@ -182,7 +185,7 @@ export default async function HeroCartelera() {
           })}
           <Link href={data.buttonUrl}>
             <button
-              className="hero-button text-black font-bold uppercase tracking-widest hover:underline decoration-1"
+              className="hero-button text-black font-bold uppercase tracking-widest hover:underline decoration-1 mt-10 underline"
               style={{
                 fontSize: 'clamp(0.8rem, 3vw, 3rem)',
                 paddingTop: 'clamp(1rem, 4vh, 5rem)',
