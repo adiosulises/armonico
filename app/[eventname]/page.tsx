@@ -11,6 +11,9 @@ export default async function EventPage({ params }: { params: Promise<{ eventnam
     <EventPageClient
       title={event.title}
       support={event.support}
+      actos={event.actos}
+      orden={event.orden}
+      reglas={event.reglas}
       date={formatDate(event.evey.start_at)}
       time={formatTime(event.evey.start_at)}
       description={event.description}

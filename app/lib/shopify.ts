@@ -46,6 +46,9 @@ export type ShopifyEvent = {
     title: string
     description: string
     support: string
+    actos: string
+    orden: string
+    reglas: string
     flyer: string
     evey: EveyEvent
     variants: ShopifyVariant[]
@@ -53,12 +56,49 @@ export type ShopifyEvent = {
 
 // Helpers
 
-function parseDescription(raw: string): { description: string; support: string } {
-    const idx = raw.indexOf('Support:')
-    if (idx === -1) return { description: raw.trim(), support: '' }
+function stripHtml(html: string): string {
+    return html
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/<[^>]+>/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim()
+}
+
+function parseDescription(raw: string): { description: string; support: string; actos: string; orden: string; reglas: string } {
+    const labels = ['Support:', 'Actos:', 'Orden:', 'Reglas:'] as const
+
+    let firstIdx = raw.length
+    for (const label of labels) {
+        const idx = raw.indexOf(label)
+        if (idx !== -1 && idx < firstIdx) firstIdx = idx
+    }
+
+    const description = raw.slice(0, firstIdx).trim()
+
+    function extract(label: string): string {
+        const idx = raw.indexOf(label)
+        if (idx === -1) return ''
+        const start = idx + label.length
+        let end = raw.length
+        for (const other of labels) {
+            if (other === label) continue
+            const otherIdx = raw.indexOf(other, start)
+            if (otherIdx !== -1 && otherIdx < end) end = otherIdx
+        }
+        return raw.slice(start, end).replace(/[\u00A0\s]+/g, ' ').trim()
+    }
+
     return {
-        description: raw.slice(0, idx).trim(),
-        support: raw.slice(idx + 'Support:'.length).trim(),
+        description,
+        support: extract('Support:'),
+        actos:   extract('Actos:'),
+        orden:   extract('Orden:'),
+        reglas:  extract('Reglas:'),
     }
 }
 
@@ -69,12 +109,15 @@ function parseVariantId(gid: string): string {
 function mapProduct(node: any): ShopifyEvent | null {
     if (!node?.metafield?.value) return null
     const evey: EveyEvent = JSON.parse(node.metafield.value)
-    const { description, support } = parseDescription(node.description ?? '')
+    const { description, support, actos, orden, reglas } = parseDescription(stripHtml(node.descriptionHtml ?? node.description ?? ''))
     return {
         handle:      node.handle,
         title:       node.title,
         description,
         support,
+        actos,
+        orden,
+        reglas,
         flyer:       node.images.edges[0]?.node.url ?? '',
         evey,
         variants: node.variants.edges.map((v: any) => ({
@@ -89,6 +132,7 @@ const PRODUCT_FIELDS = `
     handle
     title
     description
+    descriptionHtml
     images(first: 1) {
         edges { node { url } }
     }
