@@ -58,7 +58,6 @@ const productTypeLabel: Record<string, string> = {
   'Proyección': 'EN PANTALLA GRANDE',
 }
 
-// Split long titles into chunks of max N words so each chunk fits on one line
 function splitIntoRows(text: string, maxWords = 3): string[] {
   const words = text.split(' ')
   const rows: string[] = []
@@ -71,8 +70,6 @@ function splitIntoRows(text: string, maxWords = 3): string[] {
 function buildData(node: any, evey: any): HeroData {
   const typeLabel = productTypeLabel[node.productType] ?? node.productType
   const title: string = node.title
-
-  // Only split if title is long — short titles stay as one row
   const titleItems: HeroItem[] = title.length > 24
     ? splitIntoRows(title, 3).map(row => ({ type: 'title', text: row }))
     : [{ type: 'title', text: title }]
@@ -142,13 +139,13 @@ export default async function HeroCartelera() {
         @media (max-width: 767px) {
           .hero-title {
             font-size: 2.8rem !important;
-            margin-top: -0.11em !important;
-            margin-bottom: -0.17em !important;
+            margin-top: -0.07em !important;
+            margin-bottom: -0.13em !important;
           }
           .hero-subtitle {
             font-size: 1.6rem !important;
-            margin-top: 0.45em !important;
-            margin-bottom: -0.17em !important;
+            margin-top: 0.38em !important;
+            margin-bottom: -0.13em !important;
           }
           .hero-button {
             font-size: 1.4rem !important;
