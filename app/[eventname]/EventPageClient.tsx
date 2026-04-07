@@ -18,9 +18,9 @@ type Props = {
 
 export default function EventPageClient({ title, support, actos, orden, reglas, date, time, description, flyer, variants, storeDomain }: Props) {
   const expandables = [
-    actos  ? { label: 'TODOS LOS ACTOS', content: actos  } : null,
-    orden  ? { label: 'ORDEN DE ACTOS',  content: orden  } : null,
-    reglas ? { label: 'REGLAS',          content: reglas } : null,
+    actos ? { label: 'TODOS LOS ACTOS', content: actos } : null,
+    orden ? { label: 'ORDEN DE ACTOS', content: orden } : null,
+    reglas ? { label: 'REGLAS', content: reglas } : null,
   ].filter(Boolean) as { label: string; content: string }[]
 
   const [open, setOpen] = useState<number | null>(null)
@@ -32,6 +32,30 @@ export default function EventPageClient({ title, support, actos, orden, reglas, 
   const buyUrl = selectedVariant
     ? `https://${storeDomain}/cart/${selectedVariant.id}:${qty}`
     : '#'
+
+  const now = new Date()
+
+  // Safer date parsing
+  const eventDate = new Date(date + 'T00:00:00')
+  eventDate.setHours(0, 0, 0, 0)
+
+  const isTaquillaActive = now >= eventDate
+
+  const filteredVariants = variants.filter(v => {
+    const title = v.title.toLowerCase()
+
+    const isPreventa = title.includes('preventa')
+    const isTaquilla = title.includes('taquilla')
+
+    if (isPreventa) {
+      return !isTaquillaActive
+    }
+
+    if (isTaquilla) {
+      return isTaquillaActive
+    }
+    return true
+  })
 
   return (
     <section className="min-h-screen flex flex-col md:flex-row pb-6 sm:pb-0">
@@ -76,7 +100,7 @@ export default function EventPageClient({ title, support, actos, orden, reglas, 
 
         {/* Ticket variants */}
         <div className="mt-6 flex flex-col gap-1 uppercase" style={{ fontSize: 'clamp(0.9rem, 3vw, 1.25rem)' }}>
-          {variants.map((v) => {
+          {filteredVariants.map((v) => {
             const isSelected = selectedVariant?.id === v.id
             return (
               <button
@@ -105,7 +129,7 @@ export default function EventPageClient({ title, support, actos, orden, reglas, 
                   className="appearance-none bg-transparent uppercase outline-none cursor-pointer pr-2"
                   style={{ fontSize: 'clamp(0.9rem, 3vw, 1.25rem)' }}
                 >
-                  {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
                     <option key={n} value={n}>{n}</option>
                   ))}
                 </select>
