@@ -41,21 +41,27 @@ export default function EventPageClient({ title, support, actos, orden, reglas, 
 
   const isTaquillaActive = now >= eventDate
 
-  const filteredVariants = variants.filter(v => {
-    const title = v.title.toLowerCase()
-
-    const isPreventa = title.includes('preventa')
-    const isTaquilla = title.includes('taquilla')
-
-    if (isPreventa) {
-      return !isTaquillaActive
-    }
-
-    if (isTaquilla) {
-      return isTaquillaActive
-    }
-    return true
+  const preventaVariants = variants.filter(v => v.title.toLowerCase().includes('preventa'))
+  const taquillaVariants = variants.filter(v => v.title.toLowerCase().includes('taquilla'))
+  const otherVariants = variants.filter(v => {
+    const t = v.title.toLowerCase()
+    return !t.includes('preventa') && !t.includes('taquilla')
   })
+
+  const preventaSoldOut = preventaVariants.every(v => v.available === 0)
+
+  const filteredVariants = (() => {
+    if (isTaquillaActive) {
+      // Past presale date — show taquilla only
+      return [...taquillaVariants, ...otherVariants]
+    }
+    if (preventaSoldOut) {
+      // Presale sold out — show taquilla
+      return [...taquillaVariants, ...otherVariants]
+    }
+    // Default — show presale
+    return [...preventaVariants, ...otherVariants]
+  })()
 
   return (
     <section className="min-h-screen flex flex-col md:flex-row pb-6 sm:pb-0">

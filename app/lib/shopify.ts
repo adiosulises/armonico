@@ -39,6 +39,7 @@ export type ShopifyVariant = {
     id: string
     title: string
     price: string
+    available: number
 }
 
 export type ShopifyEvent = {
@@ -124,6 +125,7 @@ function mapProduct(node: any): ShopifyEvent | null {
             id:    parseVariantId(v.node.id),
             title: v.node.title,
             price: v.node.price.amount,
+            available: v.node.quantityAvailable ?? 0,
         })),
     }
 }
@@ -142,6 +144,7 @@ const PRODUCT_FIELDS = `
                 id
                 title
                 price { amount currencyCode }
+                quantityAvailable
             }
         }
     }
