@@ -89,7 +89,7 @@ function buildData(node: any, evey: any): HeroData {
       { type: 'spacer' },
       { type: 'empty' },
       { type: 'spacer' },
-      { type: 'title', text: formatDate(evey.start_at, evey.timezone) },
+      { type: 'title', text: formatDate(evey.start_at) },
     ],
     buttonText: 'COMPRAR BOLETOS',
     buttonUrl: `/${node.handle}`,
