@@ -35,6 +35,7 @@ function getNextEvent(products: any[]) {
       if (!metafield?.value) return null
       const evey = JSON.parse(metafield.value)
       const startAt = new Date(evey.start_at)
+
       return { node, evey, startAt }
     })
     .filter((e): e is NonNullable<typeof e> => e !== null && e.startAt >= now)
@@ -43,7 +44,10 @@ function getNextEvent(products: any[]) {
 }
 
 function formatDate(dateStr: string) {
-  const date = new Date(dateStr)
+  // start_at has no tz info and represents Chihuahua local time
+  // Append the Chihuahua offset (-07:00) to force correct interpretation
+  const normalized = dateStr + '-06:00'
+  const date = new Date(normalized)
   const timezone = 'America/Chihuahua'
 
   const day = new Intl.DateTimeFormat('es-MX', { day: '2-digit', timeZone: timezone }).format(date)
