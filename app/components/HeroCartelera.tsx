@@ -42,8 +42,10 @@ function getNextEvent(products: any[]) {
   return events[0] ?? null
 }
 
-function formatDate(dateStr: string, timezone: string) {
+function formatDate(dateStr: string,) {
   const date = new Date(dateStr)
+  const timezone = 'America/Chihuahua'
+
   const day = new Intl.DateTimeFormat('es-MX', { day: '2-digit', timeZone: timezone }).format(date)
   const month = new Intl.DateTimeFormat('es-MX', { month: '2-digit', timeZone: timezone }).format(date)
   const year = new Intl.DateTimeFormat('es-MX', { year: '2-digit', timeZone: timezone }).format(date)
