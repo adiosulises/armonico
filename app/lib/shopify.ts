@@ -59,6 +59,7 @@ export type ShopifyArticle = {
     handle: string
     title: string
     excerpt: string
+    contentHtml?: string
     image: { url: string; altText: string } | null
     blog: { handle: string }
     publishedAt: string
@@ -233,3 +234,24 @@ export async function getBlogArticles(blogHandle: string): Promise<ShopifyArticl
         if (!data.blog) return []
         return data.blog.articles.edges.map((e:any)=>e.node)
 }
+
+export async function getArticleByHandle(blogHandle: string, articleHandle: string) {                                                                                                                    
+    const data = await shopifyFetch<any>(`                                                                                                                                                               
+        query GetArticle($blogHandle: String!, $articleHandle: String!) {                                                                                                                                
+            blog(handle: $blogHandle) {                                                                                                                                                                
+                articleByHandle(handle: $articleHandle) {
+                    handle
+                    title
+                    excerpt
+                    contentHtml
+                    tags
+                    image { url altText }
+                    blog { handle }
+                    publishedAt
+                }
+            }
+        }
+    `, { blogHandle, articleHandle })
+    return data.blog ?? null
+}
+
