@@ -199,3 +199,71 @@ export function formatDate(start_at:string):string{
     const mon = MONTH_ABBR[parseInt(month,10)-1]
     return `${mon}.${day}.${year.slice(2)}`
 }
+
+// BLOG FETCHES
+
+export type ShopifyArticle = {
+  handle: string
+  title: string
+  contentHtml: string
+  publishedAt: string
+  tags: string[]
+  blogHandle: string
+  blogTitle: string
+  image: { url: string; altText: string | null } | null
+}
+
+export async function getAllArticles(): Promise<ShopifyArticle[]> {
+  const data = await shopifyFetch<any>(`
+    query GetAllArticles {
+      blogs(first: 20) {
+        edges {
+          node {
+            handle
+            title
+            articles(first: 50) {
+              edges {
+                node {
+                  handle
+                  title
+                  contentHtml
+                  publishedAt
+                  tags
+                  image { url altText }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  const blogs = data?.blogs?.edges ?? []
+  return blogs.flatMap((blog: any) =>
+    blog.node.articles.edges.map((e: any) => ({
+      ...e.node,
+      blogHandle: blog.node.handle,
+      blogTitle: blog.node.title,
+    }))
+  )
+}
+
+export async function getArticleByHandle(blogHandle: string, articleHandle: string): Promise<any | null> {
+  const data = await shopifyFetch<any>(`
+    query GetArticleByHandle($blogHandle: String!, $articleHandle: String!) {
+      blog(handle: $blogHandle) {
+        handle
+        title
+        articleByHandle(handle: $articleHandle) {
+          handle
+          title
+          contentHtml
+          publishedAt
+          tags
+          image { url altText }
+        }
+      }
+    }
+  `, { blogHandle, articleHandle })
+  return data?.blog ?? null
+}

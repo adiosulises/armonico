@@ -53,3 +53,27 @@ body {
 .c-hr {
   color: #0f7ccc;
 }
+
+.blog-post {
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+
+  h6 {
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  a {
+    color: #0f7ccc;
+    text-decoration: underline;
+    font-size: 20px;
+  }
+}
