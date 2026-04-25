@@ -47,7 +47,6 @@ export default function Nav() {
         { href: '/', label: 'INICIO' },
         { href: '/calendario', label: 'CALENDARIO' },
         // { href: '/tienda', label: 'TIENDA' },
-        { href: '/blog', label: 'BLOG' },
         { href: '/nosotros', label: 'NOSOTROS' },
         { href: '/blog', label: 'BLOG' },
         { href: '/contacto', label: 'CONTACTO' },
