@@ -4,7 +4,7 @@ import { ShopifyArticle } from "../lib/shopify"
 
 export default function BlogCard({ article }: { article: ShopifyArticle }) {
     return (
-        <Link href={`/blog/${article.handle}`} className="flex flex-col gap-2">
+        <Link href={`/blog/${article.blog.handle}/${article.handle}`} className="flex flex-col gap-2">
 
             {/* Thumbnail */}
             {article.image && (
