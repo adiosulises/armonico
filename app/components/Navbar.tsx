@@ -30,6 +30,7 @@ export default function Nav() {
 
     useEffect(() => {
         if (pathname !== '/') {
+            setTimeout(() => setHeroVisible(false), 0)
             return
         }
         const sentinel = document.getElementById('hero-sentinel')
