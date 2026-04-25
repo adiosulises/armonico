@@ -55,6 +55,16 @@ export type ShopifyEvent = {
     variants: ShopifyVariant[]
 }
 
+export type ShopifyArticle = {
+    handle: string
+    title: string
+    excerpt: string
+    image: { url: string; altText: string } | null
+    blog: { handle: string }
+    publishedAt: string
+    tags: string[]
+}
+
 // Helpers
 
 function stripHtml(html: string): string {
@@ -198,4 +208,28 @@ export function formatDate(start_at:string):string{
     const [year,month,day] = datePart.split('-')
     const mon = MONTH_ABBR[parseInt(month,10)-1]
     return `${mon}.${day}.${year.slice(2)}`
+}
+
+export async function getBlogArticles(blogHandle: string): Promise<ShopifyArticle[]>{
+    const data = await shopifyFetch<any>(`
+        query GetArticles($handle: String!) {
+            blog(handle: $handle) {
+                articles(first: 250) {
+                    edges{
+                        node{
+                            handle
+                            title
+                            excerpt
+                            tags
+                            image { url altText }
+                            blog { handle }
+                            publishedAt
+                        }
+                    }
+                }
+            }
+        }
+        `, { handle: blogHandle})
+        if (!data.blog) return []
+        return data.blog.articles.edges.map((e:any)=>e.node)
 }
