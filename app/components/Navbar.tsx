@@ -30,6 +30,7 @@ export default function Nav() {
 
     useEffect(() => {
         if (pathname !== '/') {
+            setTimeout(() => setHeroVisible(false), 0)
             return
         }
         const sentinel = document.getElementById('hero-sentinel')
@@ -48,6 +49,7 @@ export default function Nav() {
         // { href: '/tienda', label: 'TIENDA' },
         { href: '/blog', label: 'BLOG' },
         { href: '/nosotros', label: 'NOSOTROS' },
+        { href: '/blog', label: 'BLOG' },
         { href: '/contacto', label: 'CONTACTO' },
     ]
 
