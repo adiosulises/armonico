@@ -69,8 +69,8 @@ export default function RecsLayout({ article }: { article: any }) {
                         <h2
                             className="uppercase mb-8 leading-tight"
                             style={{
-                                fontSize: 'clamp(1.1rem, 3vw, 1.8rem)',
-                                fontFamily: 'var(--font-grotesk75)'
+                                fontSize: 'clamp(1.8rem, 3vw, 3rem)',
+                                fontFamily: 'var(--font-din)'
                             }}
                         >
                             {rec.title}
@@ -91,7 +91,7 @@ export default function RecsLayout({ article }: { article: any }) {
                             <div className="flex flex-col justify-between gap-4">
                                 <p
                                     className="text-gray-700 leading-relaxed whitespace-pre-line"
-                                    style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontFamily: 'Helvetica, Arial, sans-serif' }}
+                                    style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)' }}
                                 >
                                     {rec.body}
                                 </p>
