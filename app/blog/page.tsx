@@ -1,4 +1,4 @@
-import { getBlogArticles, ShopifyArticle, shopifyFetch } from "@/app/lib/shopify"
+import { getBlogArticles } from "@/app/lib/shopify"
 import BlogDestacado from "../components/BlogDestacado";
 import BlogGrid from "../components/BlogGrid";
 

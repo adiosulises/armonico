@@ -21,10 +21,10 @@ export default function BlogDestacado({ article }: { article: ShopifyArticle }) 
 
             {/* Etiquetas y titulo */}
             <span className="text-xl uppercase tracking-widest text-black">
-                {article.blog.handle}
+                destacado
             </span>
 
-            <h1 className="text-[2.7vw] uppercase font-bold uppercaste mt-1" style={{ fontFamily: 'var(--font-tecla)'}}>
+            <h1 className="text-[10vw] md:text-[2.7vw] uppercase font-bold uppercaste mt-1" style={{ fontFamily: 'var(--font-tecla)'}}>
                 {article.title}
             </h1>
 
